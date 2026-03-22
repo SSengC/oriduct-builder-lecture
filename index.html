@@ -3,8 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>행운의 번호 생성기</title>
+    <title>행운의 번호 생성기 & AI 동물상 테스트</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
   </head>
   <body class="dark-mode">
     <div class="theme-toggle">
@@ -27,6 +29,15 @@
       <div id="numbers-display" class="numbers-container"></div>
       
       <button id="generate-btn">번호 생성하기</button>
+
+      <div class="animal-test-section">
+        <hr>
+        <h3>🐶 AI 동물상 테스트 🐱</h3>
+        <p>카메라를 허용하고 나의 동물상을 확인해보세요!</p>
+        <button type="button" id="start-cam-btn" onclick="initAnimalModel()">테스트 시작하기</button>
+        <div id="webcam-container"></div>
+        <div id="label-container"></div>
+      </div>
 
       <div class="contact-section">
         <hr>

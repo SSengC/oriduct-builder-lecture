@@ -74,6 +74,70 @@ generateBtn.addEventListener("click", () => {
     setTimeout(() => {
       const ball = createBall(item.val, item.special);
       numbersContainer.appendChild(ball);
-    }, index * 100);
   });
 });
+
+// --- AI 동물상 테스트 로직 ---
+const ANIMAL_MODEL_URL = "https://teachablemachine.withgoogle.com/models/QOia7UN3H/";
+let animalModel, webcam, animalLabelContainer, maxPredictions;
+
+async function initAnimalModel() {
+    const startBtn = document.getElementById("start-cam-btn");
+    startBtn.textContent = "모델 로딩 중...";
+    startBtn.disabled = true;
+
+    const modelURL = ANIMAL_MODEL_URL + "model.json";
+    const metadataURL = ANIMAL_MODEL_URL + "metadata.json";
+
+    try {
+        animalModel = await tmImage.load(modelURL, metadataURL);
+        maxPredictions = animalModel.getTotalClasses();
+
+        const flip = true; 
+        webcam = new tmImage.Webcam(250, 250, flip); 
+        await webcam.setup(); 
+        await webcam.play();
+        window.requestAnimationFrame(animalLoop);
+
+        document.getElementById("webcam-container").innerHTML = "";
+        document.getElementById("webcam-container").appendChild(webcam.canvas);
+        
+        animalLabelContainer = document.getElementById("label-container");
+        animalLabelContainer.innerHTML = "";
+        for (let i = 0; i < maxPredictions; i++) {
+            const barContainer = document.createElement("div");
+            barContainer.classList.add("prediction-bar-container");
+            barContainer.innerHTML = `
+                <div class="label-text"></div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill"></div>
+                </div>
+            `;
+            animalLabelContainer.appendChild(barContainer);
+        }
+        startBtn.style.display = "none";
+    } catch (e) {
+        console.error(e);
+        alert("카메라 권한을 허용해주세요!");
+        startBtn.textContent = "테스트 시작하기";
+        startBtn.disabled = false;
+    }
+}
+
+async function animalLoop() {
+    webcam.update(); 
+    await predictAnimal();
+    window.requestAnimationFrame(animalLoop);
+}
+
+async function predictAnimal() {
+    const prediction = await animalModel.predict(webcam.canvas);
+    for (let i = 0; i < maxPredictions; i++) {
+        const className = prediction[i].className;
+        const probability = (prediction[i].probability * 100).toFixed(0);
+        
+        const barContainer = animalLabelContainer.childNodes[i];
+        barContainer.querySelector(".label-text").innerText = `${className === "Dog" ? "🐶 강아지상" : "🐱 고양이상"}: ${probability}%`;
+        barContainer.querySelector(".progress-bar-fill").style.width = probability + "%";
+    }
+}

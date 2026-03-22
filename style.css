@@ -227,3 +227,69 @@ h1 {
   margin-bottom: 20px;
   color: var(--text-color);
 }
+
+.animal-test-section {
+  margin-top: 40px;
+}
+
+.animal-test-section hr {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin-bottom: 25px;
+}
+
+#start-cam-btn {
+  background-color: var(--accent-color);
+  color: #1a1a1a;
+  border: none;
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+#webcam-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+#webcam-container canvas {
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  max-width: 100%;
+}
+
+#label-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.prediction-bar-container {
+  text-align: left;
+}
+
+.label-text {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.progress-bar-bg {
+  height: 12px;
+  background-color: var(--ball-bg);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--accent-color);
+  width: 0%;
+  transition: width 0.2s ease-out;
+}
