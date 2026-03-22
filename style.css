@@ -210,3 +210,20 @@ h1 {
   background-color: var(--accent-color);
   color: #1a1a1a;
 }
+
+.comments-section {
+  margin-top: 40px;
+  text-align: left;
+}
+
+.comments-section hr {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin-bottom: 25px;
+}
+
+.comments-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: var(--text-color);
+}
