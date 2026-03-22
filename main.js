@@ -66,6 +66,19 @@ generateBtn.addEventListener("click", () => {
       numbersContainer.appendChild(createBall(item.val, item.special));
     }, index * 100);
   });
+
+  // 재미있는 멘트 추가
+  const messages = ["오늘 기운이 아주 좋습니다! 🍀", "대박의 기운이 느껴지네요! ✨", "행운은 준비된 자에게 옵니다. 💎", "재미로만 즐겨주세요! 😊"];
+  const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+  setTimeout(() => {
+      const msgDiv = document.createElement("p");
+      msgDiv.style.color = "var(--accent-color)";
+      msgDiv.style.fontWeight = "bold";
+      msgDiv.style.marginTop = "15px";
+      msgDiv.innerText = randomMessage;
+      numbersContainer.parentElement.appendChild(msgDiv);
+      setTimeout(() => msgDiv.remove(), 3000);
+  }, 1000);
 });
 
 // --- AI 동물상 테스트 로직 ---
@@ -98,6 +111,9 @@ function setupLabels() {
 async function handleImageUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
+
+    const labelContainer = document.getElementById("label-container");
+    labelContainer.innerHTML = "<p style='text-align:center;'>🤖 AI 모델을 불러오고 분석 중입니다... 잠시만 기다려주세요.</p>";
 
     const reader = new FileReader();
     reader.onload = async (e) => {
