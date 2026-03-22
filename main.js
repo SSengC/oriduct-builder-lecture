@@ -129,8 +129,11 @@ async function predict(imageElement) {
             topAnimal = className;
         }
 
+        const isDog = className.toLowerCase().includes("dog") || className.includes("강아지");
+        const displayName = isDog ? "🐶 강아지상" : "🐱 고양이상";
+
         const barContainer = animalLabelContainer.childNodes[i];
-        barContainer.querySelector(".label-text").innerText = `${className === "Dog" ? "🐶 강아지상" : "🐱 고양이상"}: ${probability}%`;
+        barContainer.querySelector(".label-text").innerText = `${displayName}: ${probability}%`;
         barContainer.querySelector(".progress-bar-fill").style.width = probability + "%";
     }
 
@@ -142,7 +145,9 @@ function displayCompliment(animal) {
     complimentBox.style.display = "block";
     complimentBox.style.backgroundColor = body.classList.contains("dark-mode") ? "#3d3d3d" : "#f8f9fa";
     
-    if (animal === "Dog") {
+    const isDog = animal.toLowerCase().includes("dog") || animal.includes("강아지");
+
+    if (isDog) {
         complimentBox.innerHTML = `
             <h4 style="color: var(--accent-color); margin-top: 0;">당신은 보는 사람도 기분 좋게 만드는 '🐶 강아지상' 이시군요!</h4>
             <p>친절하고 상냥한 인상으로 주변 사람들에게 항상 사랑받는 스타일입니다. 웃을 때 가장 매력적이며, 사람들을 끌어당기는 긍정적인 에너지를 가지고 계시네요. 멍뭉미 넘치는 당신의 매력은 정말 독보적입니다! ✨</p>
