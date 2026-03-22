@@ -39,20 +39,19 @@
       <!-- 동물상 테스트 뷰 -->
       <section id="animal-view" style="display: none;">
         <h1>AI 동물상 테스트</h1>
-        <p>사진을 업로드하거나 카메라를 사용하여 나의 동물상을 확인해보세요!</p>
+        <p>사진을 업로드하여 나의 동물상을 확인해보세요!</p>
         
         <div class="animal-controls">
-          <button type="button" id="start-cam-btn" onclick="initAnimalModel()">📷 카메라 사용</button>
-          <label for="image-upload" class="upload-label">📁 사진 업로드</label>
+          <label for="image-upload" class="upload-label">📁 사진 업로드해서 확인하기</label>
           <input type="file" id="image-upload" accept="image/*" onchange="handleImageUpload(event)" style="display: none;">
         </div>
 
         <div id="image-preview-container">
-          <img id="uploaded-image" src="#" alt="미리보기" style="display: none; max-width: 100%; border-radius: 20px; margin-bottom: 20px;">
-          <div id="webcam-container"></div>
+          <img id="uploaded-image" src="#" alt="미리보기" style="display: none; max-width: 100%; border-radius: 20px; margin: 0 auto 20px;">
         </div>
 
         <div id="label-container"></div>
+        <div id="result-compliment" style="margin-top: 30px; padding: 20px; border-radius: 15px; line-height: 1.6; font-weight: 500; display: none;"></div>
       </section>
 
       <!-- 하단 공통 섹션 -->

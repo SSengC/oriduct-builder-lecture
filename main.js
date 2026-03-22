@@ -70,8 +70,7 @@ generateBtn.addEventListener("click", () => {
 
 // --- AI 동물상 테스트 로직 ---
 const ANIMAL_MODEL_URL = "https://teachablemachine.withgoogle.com/models/QOia7UN3H/";
-let animalModel, webcam, animalLabelContainer, maxPredictions;
-let isCamOn = false;
+let animalModel, animalLabelContainer, maxPredictions;
 
 async function loadAnimalModel() {
     if (!animalModel) {
@@ -79,32 +78,6 @@ async function loadAnimalModel() {
         const metadataURL = ANIMAL_MODEL_URL + "metadata.json";
         animalModel = await tmImage.load(modelURL, metadataURL);
         maxPredictions = animalModel.getTotalClasses();
-    }
-}
-
-async function initAnimalModel() {
-    const startBtn = document.getElementById("start-cam-btn");
-    startBtn.textContent = "로딩 중...";
-    await loadAnimalModel();
-
-    try {
-        const flip = true; 
-        webcam = new tmImage.Webcam(300, 300, flip); 
-        await webcam.setup(); 
-        await webcam.play();
-        isCamOn = true;
-        window.requestAnimationFrame(animalLoop);
-
-        document.getElementById("uploaded-image").style.display = "none";
-        const container = document.getElementById("webcam-container");
-        container.innerHTML = "";
-        container.appendChild(webcam.canvas);
-        
-        setupLabels();
-        startBtn.style.display = "none";
-    } catch (e) {
-        alert("카메라를 시작할 수 없습니다.");
-        startBtn.textContent = "📷 카메라 사용";
     }
 }
 
@@ -122,25 +95,9 @@ function setupLabels() {
     }
 }
 
-async function animalLoop() {
-    if (isCamOn) {
-        webcam.update(); 
-        await predict(webcam.canvas);
-        window.requestAnimationFrame(animalLoop);
-    }
-}
-
 async function handleImageUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
-
-    if (isCamOn && webcam) {
-        webcam.stop();
-        isCamOn = false;
-        document.getElementById("webcam-container").innerHTML = "";
-        document.getElementById("start-cam-btn").style.display = "inline-block";
-        document.getElementById("start-cam-btn").textContent = "📷 카메라 사용";
-    }
 
     const reader = new FileReader();
     reader.onload = async (e) => {
@@ -151,7 +108,6 @@ async function handleImageUpload(event) {
         await loadAnimalModel();
         setupLabels();
         
-        // 이미지가 로드된 후 예측 실행
         img.onload = async () => {
             await predict(img);
         };
@@ -161,11 +117,40 @@ async function handleImageUpload(event) {
 
 async function predict(imageElement) {
     const prediction = await animalModel.predict(imageElement);
+    let topAnimal = "";
+    let maxProb = 0;
+
     for (let i = 0; i < maxPredictions; i++) {
         const className = prediction[i].className;
         const probability = (prediction[i].probability * 100).toFixed(0);
+        
+        if (prediction[i].probability > maxProb) {
+            maxProb = prediction[i].probability;
+            topAnimal = className;
+        }
+
         const barContainer = animalLabelContainer.childNodes[i];
         barContainer.querySelector(".label-text").innerText = `${className === "Dog" ? "🐶 강아지상" : "🐱 고양이상"}: ${probability}%`;
         barContainer.querySelector(".progress-bar-fill").style.width = probability + "%";
+    }
+
+    displayCompliment(topAnimal);
+}
+
+function displayCompliment(animal) {
+    const complimentBox = document.getElementById("result-compliment");
+    complimentBox.style.display = "block";
+    complimentBox.style.backgroundColor = body.classList.contains("dark-mode") ? "#3d3d3d" : "#f8f9fa";
+    
+    if (animal === "Dog") {
+        complimentBox.innerHTML = `
+            <h4 style="color: var(--accent-color); margin-top: 0;">당신은 보는 사람도 기분 좋게 만드는 '🐶 강아지상' 이시군요!</h4>
+            <p>친절하고 상냥한 인상으로 주변 사람들에게 항상 사랑받는 스타일입니다. 웃을 때 가장 매력적이며, 사람들을 끌어당기는 긍정적인 에너지를 가지고 계시네요. 멍뭉미 넘치는 당신의 매력은 정말 독보적입니다! ✨</p>
+        `;
+    } else {
+        complimentBox.innerHTML = `
+            <h4 style="color: var(--accent-color); margin-top: 0;">당신은 도도하고 치명적인 매력의 '🐱 고양이상' 이시군요!</h4>
+            <p>신비롭고 세련된 분위기를 가진 당신은 가만히 있어도 카리스마가 느껴지는 매력적인 인상입니다. 차가워 보일 수 있지만 알면 알수록 깊은 매력이 느껴지는 스타일이시네요. 당신만의 독특한 분위기가 정말 아름답습니다! 💎</p>
+        `;
     }
 }
