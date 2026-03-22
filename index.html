@@ -1,16 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lotto Number Generator</title>
+    <title>행운의 번호 생성기</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
+  <body class="dark-mode">
+    <div class="theme-toggle">
+      <button id="theme-btn">☀️ 라이트 모드</button>
+    </div>
     <div class="container">
-      <h1>Lotto Number Generator</h1>
-      <div class="lotto-numbers"></div>
-      <button id="generate-btn">Generate Numbers</button>
+      <h1>행운의 번호 생성기</h1>
+      
+      <div class="game-selector">
+        <label for="game-select">게임 선택:</label>
+        <select id="game-select">
+          <option value="lotto">로또 6/45</option>
+          <option value="pension">연금복권 720+</option>
+          <option value="spitfire">스피또 2000</option>
+          <option value="powerball">파워볼 (가상)</option>
+          <option value="random">랜덤 숫자 (1-100)</option>
+        </select>
+      </div>
+
+      <div id="numbers-display" class="numbers-container"></div>
+      
+      <button id="generate-btn">번호 생성하기</button>
     </div>
     <script src="main.js"></script>
   </body>
