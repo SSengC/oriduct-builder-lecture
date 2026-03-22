@@ -23,7 +23,13 @@ function showView(viewId) {
 // 테마 토글 기능
 themeBtn.addEventListener("click", () => {
   body.classList.toggle("dark-mode");
-  themeBtn.textContent = body.classList.contains("dark-mode") ? "☀️ 라이트 모드" : "🌙 다크 모드";
+  const isDarkMode = body.classList.contains("dark-mode");
+  themeBtn.textContent = isDarkMode ? "☀️ 라이트 모드" : "🌙 다크 모드";
+  
+  // 디스커스 댓글 테마 업데이트를 위해 리셋 (지연 실행)
+  if (typeof DISQUS !== 'undefined') {
+      DISQUS.reset({ reload: true });
+  }
 });
 
 // 공 생성 함수
