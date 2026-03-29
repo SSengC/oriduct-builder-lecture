@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 동물상 테스트 - 인공지능이 분석하는 나의 관상</title>
+    <meta name="description" content="AI를 통해 나의 동물상을 확인해보세요. 강아지상, 고양이상 등 다양한 동물상 분석 결과를 제공합니다.">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7087459089902217" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+</head>
+<body class="dark-mode">
+    <header class="site-header">
+        <nav class="nav-menu">
+            <a href="index.html" class="nav-btn">🏠 홈</a>
+            <a href="lotto.html" class="nav-btn">🔢 번호 생성기</a>
+            <a href="animal.html" class="nav-btn active">🐶 동물상 테스트</a>
+            <a href="about.html" class="nav-btn">ℹ️ 소개</a>
+            <a href="contact.html" class="nav-btn">✉️ 문의</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section id="animal-view">
+            <h1>AI 동물상 테스트</h1>
+            <p>사진을 업로드하여 나의 동물상을 확인해보세요! 인공지능이 얼굴의 특징을 분석하여 가장 닮은 동물을 찾아줍니다.</p>
+            
+            <div class="animal-controls">
+              <label for="image-upload" class="upload-label">📁 사진 업로드해서 확인하기</label>
+              <input type="file" id="image-upload" accept="image/*" onchange="handleImageUpload(event)" style="display: none;">
+            </div>
+
+            <div id="image-preview-container">
+              <img id="uploaded-image" src="#" alt="미리보기" style="display: none; max-width: 100%; border-radius: 20px; margin: 0 auto 20px;">
+            </div>
+
+            <div id="label-container"></div>
+            <div id="result-compliment" style="margin-top: 30px; padding: 20px; border-radius: 15px; line-height: 1.6; font-weight: 500; display: none;"></div>
+
+            <article class="info-grid">
+              <div class="info-box">
+                <h3>🐾 동물상별 성격 특징</h3>
+                <p>AI가 분석하는 관상 데이터에 따르면, 각 동물상은 다음과 같은 보편적 성격 특징을 가집니다.</p>
+                <ul>
+                  <li><strong>강아지상:</strong> 사교적이고 에너지가 넘치며, 타인에 대한 공감 능력이 뛰어납니다.</li>
+                  <li><strong>고양이상:</strong> 독립적이고 직관적이며, 세련된 감각과 예리한 통찰력을 지녔습니다.</li>
+                  <li><strong>사막여우상:</strong> 귀엽고 영리하며, 어디서나 적응력이 빠르고 눈치가 빠릅니다.</li>
+                  <li><strong>공룡상:</strong> 듬직하고 카리스마가 있으며, 겉은 차가워 보이나 속은 따뜻한 '겉차속따'의 정석입니다.</li>
+                </ul>
+              </div>
+
+              <div class="info-box">
+                <h3>🔍 AI 분석 가이드</h3>
+                <p>
+                  더욱 정확한 결과를 얻으려면 <strong>정면 사진</strong>을 사용해 주세요. 
+                  조명이 너무 밝거나 어두우면 AI가 특징을 잡기 어려울 수 있습니다. 
+                  본 테스트는 재미를 위한 것이며, 관상은 환경에 따라 변할 수 있다는 점을 기억하세요!
+                </p>
+              </div>
+            </article>
+
+            <article class="detailed-article" style="margin-top: 50px; line-height: 1.8;">
+                <h2>AI는 어떻게 내 얼굴을 분석하나요?</h2>
+                <p>
+                    저희 AI 동물상 테스트는 딥러닝(Deep Learning)의 한 분야인 <strong>컨볼루션 신경망(CNN, Convolutional Neural Network)</strong> 기술을 사용합니다. 
+                    수만 장의 동물상 데이터를 학습한 인공지능 모델이 사용자의 얼굴 사진에서 눈매, 코의 형태, 입술의 곡선 등 수많은 특징점을 추출합니다.
+                </p>
+                <p>
+                    추출된 특징들은 학습된 데이터셋과 비교되어, 어떤 동물 그룹과 가장 높은 일치율을 보이는지 계산합니다. 
+                    이 모든 과정은 브라우저에서 <strong>TensorFlow.js</strong>를 통해 실시간으로 실행되므로, 귀하의 사진이 서버로 전송되지 않아 보안상 매우 안전합니다.
+                </p>
+                <h3>인상이 운명에 미치는 영향</h3>
+                <p>
+                    예로부터 관상은 사람의 운명이나 성격을 파악하는 중요한 척도로 여겨져 왔습니다. 
+                    현대 심리학에서도 첫인상이 인간관계에 미치는 영향에 대해 활발히 연구되고 있습니다. 
+                    동물상 테스트를 통해 나의 긍정적인 인상을 발견하고, 이를 활용해 더 자신감 있는 대인관계를 형성해 보는 것은 어떨까요?
+                </p>
+            </article>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a href="privacy.html">개인정보처리방침</a> | 
+            <a href="terms.html">이용약관</a> |
+            <a href="about.html">소개</a> |
+            <a href="contact.html">문의</a>
+        </div>
+        <p>&copy; 2026 행운의 번호 & AI 동물상 테스트. All rights reserved.</p>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

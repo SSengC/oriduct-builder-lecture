@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>행운의 번호 생성기 - 로또 6/45 & 연금복권</title>
+    <meta name="description" content="무작위 알고리즘을 활용한 로또, 연금복권 행운의 번호 생성기입니다. 통계와 팁도 확인해보세요.">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7087459089902217" crossorigin="anonymous"></script>
+</head>
+<body class="dark-mode">
+    <header class="site-header">
+        <nav class="nav-menu">
+            <a href="index.html" class="nav-btn">🏠 홈</a>
+            <a href="lotto.html" class="nav-btn active">🔢 번호 생성기</a>
+            <a href="animal.html" class="nav-btn">🐶 동물상 테스트</a>
+            <a href="about.html" class="nav-btn">ℹ️ 소개</a>
+            <a href="contact.html" class="nav-btn">✉️ 문의</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section id="lotto-view">
+            <h1>행운의 번호 생성기</h1>
+            <p>오늘 당신에게 행운을 가져다줄 번호를 무작위로 생성합니다. 다양한 게임 방식을 선택할 수 있습니다.</p>
+            
+            <div class="game-selector">
+              <label for="game-select">게임 선택:</label>
+              <select id="game-select">
+                <option value="lotto">로또 6/45</option>
+                <option value="pension">연금복권 720+</option>
+                <option value="spitfire">스피또 2000</option>
+                <option value="powerball">파워볼 (가상)</option>
+                <option value="random">랜덤 숫자 (1-100)</option>
+              </select>
+            </div>
+            
+            <div id="numbers-display" class="numbers-container"></div>
+            <button id="generate-btn">번호 생성하기</button>
+
+            <article class="info-grid">
+              <div class="info-box">
+                <h3>📊 로또 6/45 통계 및 상식</h3>
+                <p>
+                  로또 6/45의 이론적 당첨 확률은 약 <strong>8,145,060분의 1</strong>입니다. 
+                  많은 분들이 '자주 나오는 번호'나 '최근 안 나온 번호'를 분석하지만, 
+                  수학적으로 각 회차의 추첨은 독립 시행이므로 모든 번호의 출현 확률은 동일합니다.
+                </p>
+                <ul>
+                  <li><strong>홀짝 비율:</strong> 3:3 또는 2:4 비율이 전체의 약 80%를 차지합니다.</li>
+                  <li><strong>번호 합계:</strong> 6개 번호의 합은 주로 121~180 사이에 집중됩니다.</li>
+                  <li><strong>연속 번호:</strong> 2개 이상의 연속 번호가 포함될 확률은 약 50%입니다.</li>
+                </ul>
+              </div>
+
+              <div class="info-box">
+                <h3>💡 번호 선택 팁</h3>
+                <p>
+                  자동 생성도 좋지만, 본인만의 의미 있는 숫자(기념일, 행운의 숫자)를 1~2개 고정하고 
+                  나머지를 랜덤으로 섞는 '반자동' 방식도 인기가 많습니다. 
+                  저희 생성기는 완전 무작위 추출을 통해 편향 없는 번호 조합을 제공합니다.
+                </p>
+              </div>
+            </article>
+
+            <article class="detailed-article" style="margin-top: 50px; line-height: 1.8;">
+                <h2>복권 당첨의 확률과 수학적 원리</h2>
+                <p>
+                    우리가 흔히 즐기는 로또 6/45는 45개의 숫자 중 6개를 순서에 상관없이 맞히는 게임입니다. 
+                    이를 조합 공식(Combination)으로 계산하면 <sub>45</sub>C<sub>6</sub> = 8,145,060이 됩니다. 
+                    즉, 매주 한 게임씩 구매한다면 약 15만 년이 걸려야 한 번은 1등에 당첨될 수 있는 확률입니다.
+                </p>
+                <p>
+                    연금복권 720+의 경우에는 조금 다릅니다. 각 조(1~5조)와 6자리의 숫자가 모두 일치해야 하는데, 
+                    이는 약 5,000,000분의 1의 확률을 가집니다. 로또보다 확률이 높고 당첨금을 연금식으로 받는다는 매력이 있어 
+                    최근 많은 인기를 얻고 있습니다.
+                </p>
+                <h3>무작위 생성기의 장점</h3>
+                <p>
+                    사람의 뇌는 패턴을 찾으려는 습성이 있습니다. 그래서 번호를 직접 고를 때는 특정 간격이나 
+                    기하학적 모양, 혹은 익숙한 숫자에 편향되기 쉽습니다. 하지만 당첨 번호는 기계에 의해 
+                    완전한 무작위로 추출됩니다. 따라서 사람의 편향을 배제한 <strong>컴퓨터 무작위 생성기</strong>를 
+                    사용하는 것이 수학적으로는 가장 '공정한' 선택 방법이 될 수 있습니다.
+                </p>
+            </article>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a href="privacy.html">개인정보처리방침</a> | 
+            <a href="terms.html">이용약관</a> |
+            <a href="about.html">소개</a> |
+            <a href="contact.html">문의</a>
+        </div>
+        <p>&copy; 2026 행운의 번호 & AI 동물상 테스트. All rights reserved.</p>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
